@@ -81,7 +81,7 @@ void RPSGame::setPlayerTool(char type) {
  *  25% chance to select either of the other tool options. 
  */
 void RPSGame::setComputerTool() {
-    char bestMove = getFavored();
+    char bestMove = computer->getFavored();
     delete computer;
     int tool = rand() % 4;
     if (tool == 3){
