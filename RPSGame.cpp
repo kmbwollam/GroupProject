@@ -74,14 +74,24 @@ void RPSGame::setPlayerTool(char type) {
     }
 }
 
-/**
- * Picks a random tool for the computer.
- * 
- * TODO smart game theory AI (EXTRA)
+/*
+ * Picks a weighted random tool for the computer.
+ * 50% chance to pick the "best move" which is whatever
+ * the computer was favored against in the previous round.
+ *  25% chance to select either of the other tool options. 
  */
 void RPSGame::setComputerTool() {
+    char bestMove = getFavored();
     delete computer;
-    int tool = rand() % 3;
+    int tool = rand() % 4;
+    if (tool == 3){
+        if (bestMove == 'r'){
+            tool = 0;
+        } else if (bestMove == 'p'){
+            tool = 1
+        }
+    }
+    
     if (tool == 0) {
         computer = new Rock(computerStrengths[0]);
     } else if (tool == 1) {
