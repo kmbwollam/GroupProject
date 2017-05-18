@@ -35,6 +35,7 @@ RPSGame::RPSGame() {
     playerWins = 0;
     computerWins = 0;
     ties = 0;
+	bestMove = 'r';
 }
 
 RPSGame::~RPSGame() {
@@ -81,23 +82,26 @@ void RPSGame::setPlayerTool(char type) {
  *  25% chance to select either of the other tool options. 
  */
 void RPSGame::setComputerTool() {
-    char bestMove = computer->getFavored();
-    delete computer;
-    int tool = rand() % 4;
-    if (tool == 3){
+   delete computer;
+   int tool = rand() % 4;
+   cout << "rand: " << tool;
+   if (tool == 3){
         if (bestMove == 'r'){
             tool = 0;
         } else if (bestMove == 'p'){
-            tool = 1
+			tool = 1;
         }
     }
-    
+    cout << "tool" << tool << endl;
     if (tool == 0) {
         computer = new Rock(computerStrengths[0]);
+		bestMove = 's';
     } else if (tool == 1) {
         computer = new Paper(computerStrengths[1]);
+		bestMove = 'r';
     } else {
         computer = new Scissors(computerStrengths[2]);
+		bestMove = 'p';
     }
 }
 
